@@ -7,6 +7,7 @@ module Rich
   class RichFile 
     include Mongoid::Document
     include Mongoid::Timestamps
+    include Mongoid::Paperclip
 
     field :rich_file_file_name, type: String
     field :rich_file_content_type, type: String
@@ -24,7 +25,7 @@ module Rich
     
     paginates_per 34
     
-    has_attached_file :rich_file,
+    has_mongoid_attached_file :rich_file,
                       :styles => Proc.new {|a| a.instance.set_styles },
                       :convert_options => Proc.new { |a| Rich.convert_options[a] }
     
