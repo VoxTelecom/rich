@@ -1,9 +1,21 @@
 require 'cgi'
 require 'mime/types'
 require 'kaminari'
+require 'mongoid'
 
 module Rich
-  class RichFile < ActiveRecord::Base
+  class RichFile 
+    include Mongoid::Document
+    include Mongoid::Timestamps
+
+    field :rich_file_file_name, type: String
+    field :rich_file_content_type, type: String
+    field :rich_file_file_size, type: Integer 
+    field :rich_file_updated_at, type: DateTime
+    field :owner_type, type: String
+    field :owner_id, type: Integer
+    field :uri_cache, type: String
+    field :simplified_type, type: String, default: "file" 
 
     attr_accessible :rich_file_file_name, :rich_file_content_type, :rich_file_file_size, :rich_file_updated_at, :owner_type, :owner_id, :uri_cache, :simplified_type
 
