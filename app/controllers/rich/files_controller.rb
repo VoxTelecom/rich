@@ -10,9 +10,9 @@ module Rich
       
       if(params[:scoped] == 'true')
         if(@type == "image")
-          @items = RichFile.images.desc(:created_at).where("owner_type = ? AND owner_id = ?", params[:scope_type], params[:scope_id]).page params[:page]
+          @items = RichFile.images.desc(:created_at).where(:owner_type => params[:scope_type] , :owner_id => params[:scope_id]).page params[:page]
         else
-          @items = RichFile.files.desc(:created_at).where("owner_type = ? AND owner_id = ?", params[:scope_type], params[:scope_id]).page params[:page]
+          @items = RichFile.files.desc(:created_at).where(:owner_type => params[:scope_type] , :owner_id => params[:scope_id]).page params[:page]
         end        
       else
         if(@type == "image")
